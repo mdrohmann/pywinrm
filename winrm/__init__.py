@@ -17,6 +17,10 @@ class Response(object):
     """Response from a remote command execution"""
     def __init__(self, args):
         self.std_out, self.std_err, self.status_code = args
+        if type(self.std_out) == bytes:
+            self.std_out = self.std_out.decode('utf-8')
+        if type(self.std_err) == bytes:
+            self.std_err = self.std_err.decode('utf-8')
 
     def __repr__(self):
         # TODO put tree dots at the end if out/err was truncated
